@@ -46,8 +46,8 @@ jobs:
         run: |
           mkdir artifacts          
 
-          mv app/dist/*.exe artifacts/ || true
-          mv app/dist/*.yml artifacts/ || true
+          mv dist/*.exe artifacts/ || true
+          mv dist/*.yml artifacts/ || true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
