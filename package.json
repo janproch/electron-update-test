@@ -28,8 +28,8 @@
       "publish": [
         {
           "provider": "github",
-          "owner": "dbgate",
-          "repo": "dbgate"
+          "owner": "janproch",
+          "repo": "electron-update-test"
         }
       ]
     },
