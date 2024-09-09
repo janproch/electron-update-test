@@ -1,124 +1,123 @@
 {
-    "name": "electorn-update-test",
-    "version": "0.0.1",
-    "private": false,
-    "dependencies": {
-        "electron-log": "^4.4.1",
-        "electron-updater": "^4.6.1"
+  "name": "electorn-update-test",
+  "version": "0.0.2",
+  "private": false,
+  "dependencies": {
+    "electron-log": "^4.4.1",
+    "electron-updater": "^4.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbgate/dbgate.git"
+  },
+  "build": {
+    "artifactName": "eutest-${version}-${os}_${arch}.${ext}",
+    "appId": "com.jenasoft.eutest",
+    "productName": "EU TEST",
+    "afterSign": "electron-builder-notarize",
+    "asarUnpack": "**/*.node",
+    "mac": {
+      "category": "database",
+      "icon": "icon512-mac.png",
+      "hardenedRuntime": true,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "dbgate",
+          "repo": "dbgate"
+        }
+      ],
+      "target": {
+        "target": "default",
+        "arch": [
+          "universal",
+          "x64"
+        ]
+      }
     },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/dbgate/dbgate.git"
-    },
-    "build": {
-      "artifactName": "eutest-${version}-${os}_${arch}.${ext}",
-      "appId": "com.jenasoft.eutest",
-      "productName": "EU TEST",
-      "afterSign": "electron-builder-notarize",
-      "asarUnpack": "**/*.node",
-      "mac": {
-        "category": "database",
-        "icon": "icon512-mac.png",
-        "hardenedRuntime": true,
-        "entitlements": "entitlements.mac.plist",
-        "entitlementsInherit": "entitlements.mac.plist",
-        "publish": [
-          {
-            "provider": "github",
-            "owner": "dbgate",
-            "repo": "dbgate"
-          }
-        ],
-        "target": {
-          "target": "default",
+    "linux": {
+      "target": [
+        "deb",
+        "snap",
+        {
+          "target": "AppImage",
           "arch": [
-            "universal",
-            "x64"
+            "x64",
+            "armv7l",
+            "arm64"
           ]
+        },
+        "tar.gz"
+      ],
+      "icon": "icons/",
+      "category": "Development",
+      "synopsis": "Database manager for SQL Server, MySQL, PostgreSQL, MongoDB and SQLite",
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "dbgate",
+          "repo": "dbgate"
         }
-      },
-      "linux": {
-        "target": [
-          "deb",
-          "snap",
-          {
-            "target": "AppImage",
-            "arch": [
-              "x64",
-              "armv7l",
-              "arm64"
-            ]
-          },
-          "tar.gz"
-        ],
-        "icon": "icons/",
-        "category": "Development",
-        "synopsis": "Database manager for SQL Server, MySQL, PostgreSQL, MongoDB and SQLite",
-        "publish": [
-          {
-            "provider": "github",
-            "owner": "dbgate",
-            "repo": "dbgate"
-          }
-        ]
-      },
-      "appImage": {
-        "license": "./LICENSE",
-        "category": "Development"
-      },
-      "snap": {
-        "publish": [
-          "github",
-          "snapStore"
-        ],
-        "environment": {
-          "ELECTRON_SNAP": "true"
-        }
-      },
-      "win": {
-        "target": [
-          {
-            "target": "nsis",
-            "arch": [
-              "x64",
-              "arm64"
-            ]
-          },
-          {
-            "target": "zip",
-            "arch": [
-              "x64",
-              "arm64"
-            ]
-          }
-        ],
-        "icon": "icon.ico",
-        "publish": [
-          {
-            "provider": "github",
-            "owner": "dbgate",
-            "repo": "dbgate"
-          }
-        ]
-      },
-      "files": [
-        "packages",
-        "src",
-        "icon.png"
       ]
     },
-    "homepage": "./",
-    "scripts": {
-      "start": "cross-env DEVMODE=1 electron .",
-      "dist": "electron-builder",
-      "rebuild": "electron-builder install-app-deps"
+    "appImage": {
+      "license": "./LICENSE",
+      "category": "Development"
     },
-    "main": "src/electron.js",
-    "devDependencies": {
-     "cross-env": "^6.0.3",
-      "electron": "30.0.2",
-      "electron-builder": "23.1.0",
-      "electron-builder-notarize": "^1.5.2"
-    }
+    "snap": {
+      "publish": [
+        "github",
+        "snapStore"
+      ],
+      "environment": {
+        "ELECTRON_SNAP": "true"
+      }
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "icon.ico",
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "dbgate",
+          "repo": "dbgate"
+        }
+      ]
+    },
+    "files": [
+      "packages",
+      "src",
+      "icon.png"
+    ]
+  },
+  "homepage": "./",
+  "scripts": {
+    "start": "cross-env DEVMODE=1 electron .",
+    "dist": "electron-builder",
+    "rebuild": "electron-builder install-app-deps"
+  },
+  "main": "src/electron.js",
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "electron": "30.0.2",
+    "electron-builder": "23.1.0",
+    "electron-builder-notarize": "^1.5.2"
   }
-  
+}
