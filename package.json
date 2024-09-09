@@ -1,6 +1,6 @@
 {
   "name": "electron-update-test-pacjson",
-  "version": "0.0.21-premium-beta.4",
+  "version": "0.0.22",
   "private": false,
   "dependencies": {
     "electron-log": "^4.4.1",
