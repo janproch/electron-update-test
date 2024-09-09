@@ -69,18 +69,22 @@ function createWindow() {
 }
 
 function onAppReady() {
-  console.log(`Current channel: ${autoUpdater.channel}`);
+  console.log(`EU: Current channel: ${autoUpdater.channel}`);
+
+  autoUpdater.on('checking-for-update', () => {
+    console.log('EU: Checking for update...');
+});
 
   autoUpdater.on('error', (error) => {
-      console.error('Update error:', error);
+      console.error('EU: Update error:', error);
   });
   
   autoUpdater.on('update-available', (info) => {
-      console.log('Update available:', info);
+      console.log('EU: Update available:', info);
   });
   
   autoUpdater.on('update-not-available', (info) => {
-      console.log('Update not available:', info);
+      console.log('EU: Update not available:', info);
   });
 
 
