@@ -4,7 +4,7 @@
   "private": false,
   "dependencies": {
     "electron-log": "^4.4.1",
-    "electron-updater": "^4.6.1"
+    "electron-updater": "^6.3.4"
   },
   "repository": {
     "type": "git",
