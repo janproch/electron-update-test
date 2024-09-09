@@ -26,9 +26,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - name: setUpdaterChannel premiumbeta
+      - name: setUpdaterChannel premium-beta
         run: |
-          node setUpdaterChannel premiumbeta
+          node setUpdaterChannel premium-beta
       - name: adjustPackageJsonPremium
         run: |
           node adjustPackageJsonPremium
