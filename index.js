@@ -17,7 +17,22 @@ const isMac = () => os.platform() == 'darwin';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-let mainMenu;
+
+const htmlContent = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EU TEST</title>
+</head>
+<body>
+  <h1>EU TEST</h1>
+  <div>Version: <b>${app.getVersion()}</b></div>
+  <div>Channel: <b>${updaterChannel}</b></div>
+</body>
+</html>
+`;
 
 log.transports.file.level = 'debug';
 autoUpdater.logger = log;
@@ -39,15 +54,7 @@ function createWindow() {
   });
 
   function loadMainWindow() {
-    const startUrl =
-      process.env.ELECTRON_START_URL ||
-      url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true,
-      });
-
-    mainWindow.loadURL(startUrl);
+    mainWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(htmlContent)}`);
   }
 
   loadMainWindow();

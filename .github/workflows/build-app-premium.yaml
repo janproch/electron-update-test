@@ -35,9 +35,6 @@ jobs:
       - name: yarn install
         run: |
           yarn install
-      - name: setCurrentVersion
-        run: |
-          node setCurrentVersion
       - name: Publish
         run: |
           yarn dist
