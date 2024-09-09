@@ -48,6 +48,7 @@ jobs:
 
           mv dist/*.exe artifacts/ || true
           mv dist/*.yml artifacts/ || true
+          mv dist/*.blockmap artifacts/ || true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v1

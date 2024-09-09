@@ -34,7 +34,9 @@ const htmlContent = `
   <br/>
   <button onclick="require('electron').ipcRenderer.send('download-update', '')">Download update</button>
   <br/>
-  <button onclick="require('electron').ipcRenderer.send('check-for-updates', '')">Check for updates</button>
+  <button onclick="require('electron').ipcRenderer.send('check-for-updates', '1')">Check for updates - auto download = true</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('check-for-updates', '0')">Check for updates - auto download = false</button>
   <br/>
   <button onclick="require('electron').ipcRenderer.send('quit-and-install', '0,0')">quitAndInstall(false,false)</button>
   <br/>
@@ -85,6 +87,7 @@ function createWindow() {
 
 ipcMain.on('check-for-updates', async (event, arg) => {
   console.log('MAIN: Checking for updates...');
+  autoUpdater.autoDownload = arg == '1';
   autoUpdater.checkForUpdates();
 });
 
@@ -99,11 +102,8 @@ ipcMain.on('download-update', async (event, arg) => {
   autoUpdater.downloadUpdate();
 });
 
-
 function onAppReady() {
   console.log(`EU: Current channel: ${autoUpdater.channel}`);
-
-  autoUpdater.autoDownload = false;
 
   autoUpdater.on('checking-for-update', () => {
     console.log('EU: Checking for update...');
@@ -122,11 +122,11 @@ function onAppReady() {
   });
 
   autoUpdater.on('update-downloaded', info => {
-    console.log('EU: Update downloaded from:', info.downloadUrl);
+    console.log('EU: Update downloaded from:', info);
   });
 
   if (!process.env.DEVMODE) {
-    autoUpdater.checkForUpdates();
+    // autoUpdater.checkForUpdates();
     // autoUpdater.checkForUpdatesAndNotify();
   }
   createWindow();
