@@ -31,6 +31,20 @@ const htmlContent = `
   <div>Version: <b>${app.getVersion()}</b></div>
   <div>Channel: <b>${updaterChannel}</b></div>
   <div>isUpdaterActive: <b>${autoUpdater.isUpdaterActive()}</b></div>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('download-update', '')">Download update</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('check-for-updates', '')">Check for updates</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('quit-and-install', '0,0')">quitAndInstall(false,false)</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('quit-and-install', '0,1')">quitAndInstall(false,true)</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('quit-and-install', '1,0')">quitAndInstall(true,false)</button>
+  <br/>
+  <button onclick="require('electron').ipcRenderer.send('quit-and-install', '1,1')">quitAndInstall(true,true)</button>
+  <br/>
+  <div id='update-info'></div>
 </body>
 </html>
 `;
@@ -69,6 +83,23 @@ function createWindow() {
   });
 }
 
+ipcMain.on('check-for-updates', async (event, arg) => {
+  console.log('MAIN: Checking for updates...');
+  autoUpdater.checkForUpdates();
+});
+
+ipcMain.on('quit-and-install', async (event, arg) => {
+  const args = arg.split(',').map(arg => arg == '1');
+  console.log('MAIN: Checking for updates...', ...args);
+  autoUpdater.quitAndInstall(...args);
+});
+
+ipcMain.on('download-update', async (event, arg) => {
+  console.log('MAIN: Downloading update...');
+  autoUpdater.downloadUpdate();
+});
+
+
 function onAppReady() {
   console.log(`EU: Current channel: ${autoUpdater.channel}`);
 
@@ -84,7 +115,6 @@ function onAppReady() {
 
   autoUpdater.on('update-available', info => {
     console.log('EU: Update available:', info);
-    autoUpdater.downloadUpdate();
   });
 
   autoUpdater.on('update-not-available', info => {
@@ -93,7 +123,6 @@ function onAppReady() {
 
   autoUpdater.on('update-downloaded', info => {
     console.log('EU: Update downloaded from:', info.downloadUrl);
-    autoUpdater.quitAndInstall(true, true);
   });
 
   if (!process.env.DEVMODE) {
