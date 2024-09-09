@@ -44,6 +44,7 @@ jobs:
           mkdir artifacts          
 
           mv dist/*.exe artifacts/ || true
+          mv dist/*.blockmap artifacts/ || true
           mv dist/*.yml artifacts/ || true
 
       - name: Upload artifacts

@@ -30,6 +30,7 @@ const htmlContent = `
   <h1>EU TEST</h1>
   <div>Version: <b>${app.getVersion()}</b></div>
   <div>Channel: <b>${updaterChannel}</b></div>
+  <div>isUpdaterActive: <b>${autoUpdater.isUpdaterActive()}</b></div>
 </body>
 </html>
 `;
@@ -71,25 +72,33 @@ function createWindow() {
 function onAppReady() {
   console.log(`EU: Current channel: ${autoUpdater.channel}`);
 
+  autoUpdater.autoDownload = false;
+
   autoUpdater.on('checking-for-update', () => {
     console.log('EU: Checking for update...');
-});
-
-  autoUpdater.on('error', (error) => {
-      console.error('EU: Update error:', error);
-  });
-  
-  autoUpdater.on('update-available', (info) => {
-      console.log('EU: Update available:', info);
-  });
-  
-  autoUpdater.on('update-not-available', (info) => {
-      console.log('EU: Update not available:', info);
   });
 
+  autoUpdater.on('error', error => {
+    console.error('EU: Update error:', error);
+  });
+
+  autoUpdater.on('update-available', info => {
+    console.log('EU: Update available:', info);
+    autoUpdater.downloadUpdate();
+  });
+
+  autoUpdater.on('update-not-available', info => {
+    console.log('EU: Update not available:', info);
+  });
+
+  autoUpdater.on('update-downloaded', info => {
+    console.log('EU: Update downloaded from:', info.downloadUrl);
+    autoUpdater.quitAndInstall(true, true);
+  });
 
   if (!process.env.DEVMODE) {
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdates();
+    // autoUpdater.checkForUpdatesAndNotify();
   }
   createWindow();
 }
