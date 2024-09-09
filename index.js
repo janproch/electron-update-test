@@ -69,6 +69,21 @@ function createWindow() {
 }
 
 function onAppReady() {
+  console.log(`Current channel: ${autoUpdater.channel}`);
+
+  autoUpdater.on('error', (error) => {
+      console.error('Update error:', error);
+  });
+  
+  autoUpdater.on('update-available', (info) => {
+      console.log('Update available:', info);
+  });
+  
+  autoUpdater.on('update-not-available', (info) => {
+      console.log('Update not available:', info);
+  });
+
+
   if (!process.env.DEVMODE) {
     autoUpdater.checkForUpdatesAndNotify();
   }
