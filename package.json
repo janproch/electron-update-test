@@ -1,5 +1,5 @@
 {
-  "name": "electorn-update-test",
+  "name": "electron-update-test",
   "version": "0.0.11",
   "private": false,
   "dependencies": {
