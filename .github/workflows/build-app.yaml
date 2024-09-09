@@ -32,6 +32,9 @@ jobs:
       - name: setCurrentVersion
         run: |
           node setCurrentVersion
+      - name: Publish
+        run: |
+          yarn dist
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
