@@ -1,9 +1,9 @@
-name: Electron app PREMIUM BETA
+name: Electron app GAMMA = PREMIUM BETA
 
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-gamma.[0-9]+'
 
 jobs:
   build:
@@ -26,9 +26,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - name: setUpdaterChannel premium-beta
+      - name: setUpdaterChannel gamma
         run: |
-          node setUpdaterChannel premium-beta
+          node setUpdaterChannel gamma
       - name: adjustPackageJsonPremium
         run: |
           node adjustPackageJsonPremium
