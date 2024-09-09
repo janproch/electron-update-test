@@ -1,6 +1,6 @@
 {
   "name": "electorn-update-test",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "dependencies": {
     "electron-log": "^4.4.1",
