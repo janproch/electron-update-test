@@ -38,8 +38,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-          WIN_CSC_LINK: ${{ secrets.WINCERT_2025 }}
-          WIN_CSC_KEY_PASSWORD: ${{ secrets.WINCERT_2025_PASSWORD }}
+          # WIN_CSC_LINK: ${{ secrets.WINCERT_2025 }}
+          # WIN_CSC_KEY_PASSWORD: ${{ secrets.WINCERT_2025_PASSWORD }}
 
 
       - name: Copy artifacts
