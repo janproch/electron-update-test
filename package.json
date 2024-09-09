@@ -35,6 +35,7 @@
     },
     "files": [
       "index.js",
+      "index.html",
       "updaterChannel.js",
       "icon.png"
     ]
